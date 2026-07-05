@@ -3,7 +3,6 @@ export const company = {
   tagline: "Everything You Need. Delivered with Confidence.",
   description:
     "AAM Partners LLC brings together quality products across multiple categories, helping families find everything they need in one trusted online marketplace.",
-  phone: "(000) 000-0000",
   email: "aampartnersllc1@gmail.com",
   address: {
     street: "717 S Military Hwy",

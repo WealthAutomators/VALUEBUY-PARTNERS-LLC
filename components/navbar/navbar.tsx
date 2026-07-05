@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Heart, Menu, Phone, ShoppingBag, User, X } from "lucide-react";
+import { Heart, Menu, ShoppingBag, User, X } from "lucide-react";
 import { company } from "@/data/company";
 import { navigationLinks } from "@/data/navigation";
 import { useCart } from "@/context/CartContext";
@@ -18,114 +18,102 @@ export function Navbar() {
   const { wishlist } = useWishlist();
 
   return (
-    <header className="bg-white">
-      <div className="border-b border-border">
-        <Container>
-          <div className="flex h-16 items-center justify-between gap-4 lg:h-[72px]">
-            <Link href="/" className="shrink-0">
-              <Image src="/logo/logo.svg" alt={company.name} width={180} height={48} priority />
-            </Link>
+    <header className="border-b border-border bg-white">
+      <Container>
+        <div className="flex h-14 items-center gap-4 lg:h-16">
+          <Link href="/" className="shrink-0">
+            <Image src="/logo/logo.svg" alt={company.name} width={150} height={40} priority className="h-8 w-auto lg:h-9" />
+          </Link>
 
-            <div className="flex items-center gap-1 sm:gap-2">
-              <a
-                href={`tel:${company.phone.replace(/\D/g, "")}`}
-                className="hidden items-center gap-1.5 text-sm text-muted-foreground hover:text-primary lg:flex"
-              >
-                <Phone className="h-4 w-4" />
-                {company.phone}
-              </a>
-
-              <Button variant="ghost" size="icon" asChild className="relative">
-                <Link href="/wishlist" aria-label="Wishlist">
-                  <Heart className="h-5 w-5" />
-                  {wishlist.length > 0 && (
-                    <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-white">
-                      {wishlist.length}
-                    </span>
-                  )}
-                </Link>
-              </Button>
-
-              <Button variant="ghost" size="icon" asChild>
-                <Link href="/profile" aria-label="Log in">
-                  <User className="h-5 w-5" />
-                </Link>
-              </Button>
-
-              <Button variant="ghost" size="icon" asChild className="relative">
-                <Link href="/cart" aria-label="Cart">
-                  <ShoppingBag className="h-5 w-5" />
-                  {itemCount > 0 && (
-                    <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
-                      {itemCount}
-                    </span>
-                  )}
-                </Link>
-              </Button>
-
-              <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
-                {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </div>
-
-      <nav className="hidden border-b border-border lg:block">
-        <Container>
-          <ul className="flex items-center gap-1">
-            {navigationLinks.map((link) => (
-              <li
-                key={link.href}
-                className="relative"
-                onMouseEnter={() => link.children && setActiveDropdown(link.label)}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <Link
-                  href={link.href}
-                  className="block px-4 py-3.5 text-sm font-medium text-foreground transition-colors hover:text-primary"
+          <nav className="hidden flex-1 justify-center lg:flex">
+            <ul className="flex items-center gap-0.5">
+              {navigationLinks.map((link) => (
+                <li
+                  key={link.href}
+                  className="relative"
+                  onMouseEnter={() => link.children && setActiveDropdown(link.label)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  {link.label}
-                </Link>
-                {link.children && activeDropdown === link.label && (
-                  <div className="absolute left-0 top-full z-50 min-w-[200px] rounded-xl border border-border bg-white py-2 shadow-lg">
-                    {link.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
+                  <Link
+                    href={link.href}
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/85 transition-colors hover:bg-primary/5 hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                  {link.children && activeDropdown === link.label && (
+                    <div className="absolute left-0 top-full z-50 mt-1 min-w-[210px] rounded-xl border border-border bg-white py-1.5 shadow-lg">
+                      {link.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block px-3 py-2 text-sm text-foreground hover:bg-muted hover:text-primary"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
+            <Button variant="ghost" size="icon" asChild className="relative h-9 w-9">
+              <Link href="/wishlist" aria-label="Wishlist">
+                <Heart className="h-[18px] w-[18px]" />
+                {wishlist.length > 0 && (
+                  <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-white">
+                    {wishlist.length}
+                  </span>
                 )}
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </nav>
+              </Link>
+            </Button>
+
+            <Button variant="ghost" size="icon" asChild className="h-9 w-9">
+              <Link href="/profile" aria-label="Log in">
+                <User className="h-[18px] w-[18px]" />
+              </Link>
+            </Button>
+
+            <Button variant="ghost" size="icon" asChild className="relative h-9 w-9">
+              <Link href="/cart" aria-label="Cart">
+                <ShoppingBag className="h-[18px] w-[18px]" />
+                {itemCount > 0 && (
+                  <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
+                    {itemCount}
+                  </span>
+                )}
+              </Link>
+            </Button>
+
+            <Button variant="ghost" size="icon" className="h-9 w-9 lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+              {mobileOpen ? <X className="h-[18px] w-[18px]" /> : <Menu className="h-[18px] w-[18px]" />}
+            </Button>
+          </div>
+        </div>
+      </Container>
 
       {mobileOpen && (
-        <div className="border-b border-border bg-white lg:hidden">
-          <Container className="py-4">
-            <ul className="space-y-1">
+        <div className="border-t border-border bg-white lg:hidden">
+          <Container className="py-3">
+            <ul className="space-y-0.5">
               {navigationLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block rounded-md px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-muted"
                     onClick={() => setMobileOpen(false)}
                   >
                     {link.label}
                   </Link>
                   {link.children && (
-                    <ul className="ml-4 mt-1 space-y-1">
+                    <ul className="ml-3 mt-0.5 space-y-0.5 border-l border-border pl-3">
                       {link.children.map((child) => (
                         <li key={child.href}>
                           <Link
                             href={child.href}
-                            className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-primary"
+                            className="block rounded-lg px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted hover:text-primary"
                             onClick={() => setMobileOpen(false)}
                           >
                             {child.label}
@@ -137,10 +125,6 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-            <a href={`tel:${company.phone.replace(/\D/g, "")}`} className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-              <Phone className="h-4 w-4" />
-              {company.phone}
-            </a>
           </Container>
         </div>
       )}

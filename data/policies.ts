@@ -83,7 +83,7 @@ export const shippingPolicy = {
     },
     {
       title: "Lost or Damaged Packages",
-      content: `If your package arrives damaged or doesn't arrive within 10 business days of the estimated delivery date, please contact us at ${company.email} or ${company.phone}. We'll work with the carrier to resolve the issue and ensure you receive your order.`,
+      content: `If your package arrives damaged or doesn't arrive within 10 business days of the estimated delivery date, please contact us at ${company.email}. We'll work with the carrier to resolve the issue and ensure you receive your order.`,
     },
   ],
 };
@@ -156,7 +156,7 @@ export const refundPolicy = {
     },
     {
       title: "Contact Us",
-      content: `Questions about refunds? Reach our team at ${company.email} or call ${company.phone} Monday through Friday, 9am–6pm EST.`,
+      content: `Questions about refunds? Reach our team at ${company.email} Monday through Friday, 9am–6pm EST.`,
     },
   ],
 };

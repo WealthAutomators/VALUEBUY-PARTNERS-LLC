@@ -36,7 +36,7 @@ export function CategoryCarousel() {
   const homepageCategories = categories.filter((c) => homepageCategorySlugs.includes(c.slug));
 
   return (
-    <section className="py-12 md:py-16">
+    <section className="py-8 md:py-10">
       <Container>
         <SectionHeading title="Shop by Category" centered />
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-5">

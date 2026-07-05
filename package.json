@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "images:unsplash": "node scripts/download-unsplash-images.mjs",
+    "images:products": "node scripts/download-product-images.mjs",
     "images:apply": "node scripts/apply-custom-images.mjs",
     "images:homepage": "node scripts/download-homepage-images.mjs"
   },
